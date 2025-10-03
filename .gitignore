@@ -11,11 +11,22 @@ build/
 # Test results
 test-results/
 playwright-report/
+playwright/.cache/
 logs/
 *.log
 
 # Screenshots
 screenshots/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
