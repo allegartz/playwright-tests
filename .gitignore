@@ -209,6 +209,9 @@ __marimo__/
 # Node.js
 node_modules/
 
+# Environment variables
+.env
+
 # Playwright
 playwright-report/
 test-results/
