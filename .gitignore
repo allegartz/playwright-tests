@@ -1,3 +1,22 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# TypeScript
+dist/
+build/
+*.tsbuildinfo
+
+# Test results
+test-results/
+playwright-report/
+logs/
+*.log
+
+# Screenshots
+screenshots/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
