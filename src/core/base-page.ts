@@ -115,8 +115,8 @@ export abstract class BasePage {
    * Execute JavaScript
    * @param script - JavaScript code to execute
    */
-  async executeScript<T>(script: string | Function): Promise<T> {
-    return await this.page.evaluate(script);
+  async executeScript<T>(script: string): Promise<T> {
+    return await this.page.evaluate(script) as T;
   }
   
   /**

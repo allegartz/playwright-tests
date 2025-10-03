@@ -33,13 +33,17 @@ export class DomMutationWatcher implements IWatcher {
     this.logger.debug('Initializing DOM Mutation Watcher');
     
     // Inject MutationObserver vào page
+    // Note: This code runs in browser context
     await this.page.addInitScript(() => {
-      // Store mutations in window object
-      (window as any).__domMutations = [];
+      // @ts-ignore - Running in browser context
+      window.__domMutations = [];
       
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          (window as any).__domMutations.push({
+      // @ts-ignore - Running in browser context
+      const observer = new MutationObserver((mutations: any) => {
+        // @ts-ignore - Running in browser context
+        mutations.forEach((mutation: any) => {
+          // @ts-ignore - Running in browser context
+          window.__domMutations.push({
             type: mutation.type,
             addedNodes: mutation.addedNodes.length,
             removedNodes: mutation.removedNodes.length,
@@ -50,7 +54,7 @@ export class DomMutationWatcher implements IWatcher {
         });
       });
       
-      // Observe toàn bộ document
+      // @ts-ignore - Running in browser context
       observer.observe(document.body, {
         childList: true,
         attributes: true,
@@ -58,7 +62,8 @@ export class DomMutationWatcher implements IWatcher {
         attributeOldValue: true,
       });
       
-      (window as any).__mutationObserver = observer;
+      // @ts-ignore - Running in browser context
+      window.__mutationObserver = observer;
     });
   }
   
@@ -73,7 +78,8 @@ export class DomMutationWatcher implements IWatcher {
     
     // Collect mutations từ page
     const mutations = await this.page.evaluate(() => {
-      return (window as any).__domMutations || [];
+      // @ts-ignore - Running in browser context
+      return window.__domMutations || [];
     });
     
     // Convert sang WatcherEvent format
@@ -96,8 +102,10 @@ export class DomMutationWatcher implements IWatcher {
     
     // Disconnect observer
     await this.page.evaluate(() => {
-      if ((window as any).__mutationObserver) {
-        (window as any).__mutationObserver.disconnect();
+      // @ts-ignore - Running in browser context
+      if (window.__mutationObserver) {
+        // @ts-ignore - Running in browser context
+        window.__mutationObserver.disconnect();
       }
     });
     
