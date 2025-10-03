@@ -1,0 +1,41 @@
+{
+  "framework": {
+    "name": "Playwright Test Automation Framework",
+    "version": "1.0.0",
+    "author": "Your Team"
+  },
+  "browser": {
+    "headless": true,
+    "slowMo": 0,
+    "defaultTimeout": 30000,
+    "navigationTimeout": 60000
+  },
+  "execution": {
+    "maxWorkers": 4,
+    "retries": 2,
+    "parallel": true
+  },
+  "elements": {
+    "autoRetry": true,
+    "retryAttempts": 3,
+    "retryDelay": 1000,
+    "waitForStable": true
+  },
+  "watchers": {
+    "enabled": true,
+    "domMutation": true,
+    "networkMonitoring": true,
+    "consoleMonitoring": true
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/test.log",
+    "console": true
+  },
+  "reporting": {
+    "screenshots": true,
+    "video": true,
+    "trace": true,
+    "reportPath": "test-results"
+  }
+}
